@@ -1,4 +1,4 @@
-// Antes de ES6
+// ----------------------------- Antes de ES6
 
     // Constructor
 function Person(name) {
@@ -6,26 +6,59 @@ function Person(name) {
 }
     // Metodo
 Person.prototype.greet = function() {
-    return 'Hello, I am ' + this.name;
+    console.log('Hello, I am ' + this.name);
 }
 
 var person = new Person('Victor');
 console.log(person.name);
-console.log(person.greet());
+person.greet();
 
-// ES6
+    // Clase Hija
+function Developer(name) {
+    this.name = name;
+}
+    // Herencia
+Developer.prototype = Object.create(Person.prototype);
+
+Developer.prototype.writeCode = function(coffee) {
+    if (coffee) console.log('I am working in a new feature');
+    else console.log('I need coffee, please!');
+};
+
+var dev = new Developer('Vic');
+dev.greet();
+dev.writeCode(coffee = true);
+
+
+// ----------------------------- ES6
 class Dog {
     // Constructor
-    constructor(dog) {
-        this.name = dog;
+    constructor(name) {
+        this.name = name;
     }
     // Metodo
     greet() {
-        return 'Hello, I am a dog, and my name is: ' + this.name;
+        console.log('Hello, I am a pet, and my name is: ' + this.name);
+    }
+}
+
+    // Clase Hija
+    // Herencia
+class Cat extends Dog {
+    constructor(name) {
+        super(name)
+    }
+
+    drinkMilk(milk) {
+        milk ? console.log('Drinking Milk ... :)') : console.log('Milk is over, give milk, please!');
     }
 }
 
 const dog = new Dog('Chiquis');
 console.log(dog.name);
-console.log(dog.greet());
+dog.greet();
 
+const cat = new Cat('Michi');
+console.log(cat.name);
+cat.greet();
+cat.drinkMilk(milk = false);
